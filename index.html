@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تولدت مبارک فریِ قشنگم 🌸🎂 | اختصاصی بنیامین و حنا</title>
+    <!-- Google Fonts: Vazirmatn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- Ambient Glow Orbs & Floating Background Particles -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="heart-bg-container" id="heartBg"></div>
+
+    <!-- 1. LOCK SCREEN / GATE -->
+    <div id="lockScreen" class="lock-screen">
+        <div class="lock-card glass-panel">
+            <div class="lock-badge">🔐 ورود به دنیای اختصاصی</div>
+            
+            <div class="avatar-wrapper">
+                <div class="avatar-ring real-photo-ring">
+                    <img src="images/hanna-avatar.jpg" alt="حنا فرفری" class="lock-avatar-img">
+                </div>
+                <span class="avatar-crown">👑</span>
+            </div>
+
+            <h1 class="lock-title">سلام فِریِ قشنگم! 🌸✨</h1>
+            <p class="lock-subtitle">اینجا یه دنیای مخفیه که بنیامین فقط برای «فری قاچو کش» ساخته...</p>
+            
+            <div class="hint-badge">
+                <span>💡 راهنمایی: قشنگ‌ترین تاریخ دنیا (۱۳۸۹/۰۸/۰۸)</span>
+            </div>
+
+            <!-- PIN Display -->
+            <div class="pin-display-container">
+                <div class="pin-display" id="pinDisplay">
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                </div>
+                <div class="pin-text-preview" id="pinTextPreview">_ _ _ _ / _ _ / _ _</div>
+            </div>
+
+            <div id="errorMsg" class="error-msg">رمز اشتباهه فری قاچو کش! مگه میشه تاریخ تولدت یادت بره؟ 🥺</div>
+
+            <!-- Numeric Keypad -->
+            <div class="keypad">
+                <button class="key-btn" onclick="pressKey('1')">۱</button>
+                <button class="key-btn" onclick="pressKey('2')">۲</button>
+                <button class="key-btn" onclick="pressKey('3')">۳</button>
+                <button class="key-btn" onclick="pressKey('4')">۴</button>
+                <button class="key-btn" onclick="pressKey('5')">۵</button>
+                <button class="key-btn" onclick="pressKey('6')">۶</button>
+                <button class="key-btn" onclick="pressKey('7')">۷</button>
+                <button class="key-btn" onclick="pressKey('8')">۸</button>
+                <button class="key-btn" onclick="pressKey('9')">۹</button>
+                <button class="key-btn key-action" onclick="clearPin()">پاک کردن</button>
+                <button class="key-btn" onclick="pressKey('0')">۰</button>
+                <button class="key-btn key-submit" onclick="checkPasscode()">ورود 💖</button>
+            </div>
+
+            <p class="lock-quick-hint">رمز: <b>13890808</b> یا <b>890808</b> یا <b>8888</b></p>
+        </div>
+    </div>
+
+    <!-- 2. MAIN WEBSITE CONTENT (UNLOCKED) -->
+    <main id="mainContent" class="main-content hidden">
+
+        <!-- Floating Music Player Widget -->
+        <div class="music-widget glass-panel" id="musicWidget">
+            <div class="vinyl-disc" id="vinylDisc">
+                <span class="vinyl-core">🎵</span>
+            </div>
+            <div class="music-info">
+                <span class="music-title">آهنگ اختصاصی فری و بنیامین 🌸</span>
+                <span class="music-artist" id="musicStatus">پخش ملودی عاشقانه</span>
+            </div>
+            <button class="music-toggle-btn" id="musicToggleBtn" onclick="toggleMusic()" aria-label="پخش/توقف آهنگ">
+                ▶️
+            </button>
+            <audio id="bgAudio" loop preload="auto">
+                <source src="music/song.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+            <div class="hero-badge animate-float">🎉 امروز روز توئه، ۸ آبان! 🎉</div>
+            <h1 class="hero-title">
+                تولدت مبارک <span class="highlight-pink glow-text">فِریِ قشنگم!</span> 🎂✨
+            </h1>
+            <p class="hero-subtitle">
+                حنا جانم، فرفری دوست‌داشتنی و قاچو کش من... از همون روزی که به این دنیا اومدی، زندگی من هزار برابر قشنگ‌تر و رنگی‌تر شد!
+            </p>
+
+            <!-- Relationship Counter -->
+            <div class="anniversary-box glass-panel">
+                <div class="anniversary-header">
+                    <span class="heartbeat-icon">💓</span>
+                    <span class="anniversary-title">از ۳ خرداد ۱۴۰۵ که سرنوشت ما رو کنار هم گذاشت:</span>
+                </div>
+                <div class="time-counter-grid" id="timeCounter">
+                    <div class="time-box">
+                        <span class="time-val" id="daysCount">0</span>
+                        <span class="time-lbl">روز</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-val" id="hoursCount">0</span>
+                        <span class="time-lbl">ساعت</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-val" id="minutesCount">0</span>
+                        <span class="time-lbl">دقیقه</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-val" id="secondsCount">0</span>
+                        <span class="time-lbl">ثانیه</span>
+                    </div>
+                </div>
+                <p class="anniversary-footer">هر ثانیه بیشتر از قبل عاشقتم فریِ من 💖</p>
+            </div>
+
+            <div class="scroll-down-indicator">
+                <span>بیا پایین‌تر، سورپرایزهای ویژه منتظرته! 👇</span>
+            </div>
+        </section>
+
+        <!-- LEVEL-10 LUXURY 3D CAKE SECTION -->
+        <section class="cake-section glass-panel">
+            <div class="section-tag">🎂 کیک رویایی تولد</div>
+            <h2 class="section-title">آرزو کن و شمع‌ها رو فوت کن!</h2>
+            <p class="section-subtitle">روی شمع‌ها یا کیک بزن تا خاموش بشن و آرزوت بره بالا 🕯️✨</p>
+
+            <div class="deluxe-cake-stage">
+                <div class="cake-glow-back"></div>
+                
+                <div class="cake-container" id="cakeContainer" onclick="blowCandles()">
+                    <div class="cake">
+                        <!-- Candles with Real Dual Flame & Halos -->
+                        <div class="candles-wrapper">
+                            <div class="candle candle-1">
+                                <div class="flame-halo"></div>
+                                <div class="flame" id="flame1"></div>
+                                <div class="smoke" id="smoke1"></div>
+                            </div>
+                            <div class="candle candle-2">
+                                <div class="flame-halo"></div>
+                                <div class="flame" id="flame2"></div>
+                                <div class="smoke" id="smoke2"></div>
+                            </div>
+                            <div class="candle candle-3">
+                                <div class="flame-halo"></div>
+                                <div class="flame" id="flame3"></div>
+                                <div class="smoke" id="smoke3"></div>
+                            </div>
+                        </div>
+
+                        <!-- 3-Tier Luxury Cake -->
+                        <div class="cake-top">
+                            <div class="strawberries">
+                                <span class="berry">🍓</span>
+                                <span class="cherry">🍒</span>
+                                <span class="berry">🍓</span>
+                            </div>
+                            <div class="pearl-frosting"></div>
+                        </div>
+                        <div class="cake-middle">
+                            <div class="frosting-layer"></div>
+                            <div class="drip-container">
+                                <span class="drip"></span>
+                                <span class="drip"></span>
+                                <span class="drip"></span>
+                                <span class="drip"></span>
+                                <span class="drip"></span>
+                            </div>
+                        </div>
+                        <div class="cake-bottom">
+                            <div class="cream-ribbon">
+                                <span>فری قاچو کش 💖</span>
+                            </div>
+                        </div>
+                        <div class="cake-plate"></div>
+                    </div>
+                </div>
+
+                <div class="blow-instruction" id="blowHint">
+                    <span>👆 برای فوت کردن شمع‌ها اینجا کلیک کن!</span>
+                </div>
+            </div>
+
+            <!-- Wish Reveal Box -->
+            <div id="cakeWishBox" class="wish-reveal-box hidden">
+                <div class="wish-star-burst">🌟 ✨ 💖 ✨ 🌟</div>
+                <h3 class="wish-heading">آرزوی امسال من برای تو فری جانم:</h3>
+                <div class="wish-quote-card">
+                    <p class="wish-highlight">«دوست دارم همیشه کنارم باشی...» 💖</p>
+                    <p class="wish-text">
+                        هر آرزویی که تو دلت کردی، من قول مردونه میدم که تا آخرش کنارت باشم تا با هم به تک‌تکشون برسیم و دنیامون رو بسازیم.
+                    </p>
+                </div>
+                <button class="sky-lantern-btn" onclick="releaseSkyLantern()">
+                    🏮 یه آرزوی دیگه بکن و فانوس رو بفرست به آسمون!
+                </button>
+            </div>
+        </section>
+
+        <!-- 3D INTERACTIVE SURPRISE GIFT BOX -->
+        <section class="gift-section glass-panel">
+            <div class="section-tag">🎁 سورپرایز ویژه بنیامین</div>
+            <h2 class="section-title">جعبه کادوی جادویی فِری 🎀</h2>
+            <p class="section-subtitle">روی جعبه کادو ضربه بزن تا روبانش باز بشه و سورپرایز بیرون بپره!</p>
+
+            <div class="gift-box-wrapper" id="giftBoxWrapper" onclick="toggleGiftBox()">
+                <div class="gift-box" id="giftBox">
+                    <div class="gift-lid" id="giftLid">
+                        <div class="gift-bow">
+                            <div class="bow-loop left"></div>
+                            <div class="bow-loop right"></div>
+                            <div class="bow-center"></div>
+                        </div>
+                        <div class="lid-ribbon"></div>
+                    </div>
+                    <div class="gift-body">
+                        <div class="box-ribbon-v"></div>
+                        <div class="box-ribbon-h"></div>
+                        <div class="gift-sparkles-idle">✨</div>
+                    </div>
+                </div>
+                <div class="gift-tap-hint" id="giftTapHint">
+                    <span>🎁 برای باز کردن کادو لمس کن! 👈</span>
+                </div>
+            </div>
+
+            <!-- Revealed Surprise Token Inside Box -->
+            <div class="gift-revealed-content hidden" id="giftRevealed">
+                <div class="golden-token-card">
+                    <div class="token-shine"></div>
+                    <div class="token-header">
+                        <span class="token-icon">👑</span>
+                        <h3>کارت سوپرایز طلایی بنیامین برای حنا</h3>
+                        <span class="token-tag">VIP BIRTHDAY PASS</span>
+                    </div>
+                    <div class="token-body">
+                        <p class="token-main-msg">
+                            «فری قاچو کش، این کارت به منزله سند رسمی عشقه! هرچیزی که بخوای، هرجا که بگی و هر تصمیمی که بگیری، حق تا ابد با توئه!»
+                        </p>
+                        <div class="token-perks">
+                            <div class="perk-item">
+                                <span class="perk-icon">🍉</span>
+                                <span>قاچ‌های نامحدود هندونه و پاستیل</span>
+                            </div>
+                            <div class="perk-item">
+                                <span class="perk-icon">🚗</span>
+                                <span>یه گردش رمانتیک پاییزی هرجا که بگی</span>
+                            </div>
+                            <div class="perk-item">
+                                <span class="perk-icon">🤗</span>
+                                <span>بغل و نازکشیدن نامحدود ۲۴ ساعته</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="token-footer">
+                        <span>امضا: بنیامین 🖤 | بدون تاریخ انقضا ♾️</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LUXURY PHOTO CAROUSEL & POLAROID MEMORIES -->
+        <section class="memories-section glass-panel">
+            <div class="section-tag">📸 آلبوم خاطرات دونفره</div>
+            <h2 class="section-title">قاب‌های ماندگار از فِری و بنیامین</h2>
+            <p class="section-subtitle">روی هر عکس کلیک کن تا بزرگ و فول‌اسکرین با کیفیت ببینی ✨</p>
+
+            <!-- Interactive Carousel Slider -->
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide active" onclick="openLightbox('images/hanna-avatar.jpg', 'دختر پاییزی من با گل موهای نازش 🌺')">
+                        <div class="slide-card">
+                            <img src="images/hanna-avatar.jpg" alt="فری با گل مو" class="slide-img">
+                            <div class="slide-overlay">
+                                <h4>فری با گل‌مو 🌺</h4>
+                                <p>زیباترین لبخند دنیا</p>
+                                <span class="zoom-pill">🔍 لمس برای زوم</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide" onclick="openLightbox('images/hanna-funny.jpg', 'فری قاچو کش وقتی شیطنتش گل می‌کنه! 😜🍉')">
+                        <div class="slide-card">
+                            <img src="images/hanna-funny.jpg" alt="فری شیطون" class="slide-img">
+                            <div class="slide-overlay">
+                                <h4>شیطنت‌های فرفری 🍉</h4>
+                                <p>قاچو کش‌ترین دختر دنیا</p>
+                                <span class="zoom-pill">🔍 لمس برای زوم</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide" onclick="openLightbox('images/benyamin.jpg', 'دیوونه‌ترین عاشقت با همون تیپ مشکی دلخواهت 🖤')">
+                        <div class="slide-card">
+                            <img src="images/benyamin.jpg" alt="بنیامین تیپ مشکی" class="slide-img">
+                            <div class="slide-overlay">
+                                <h4>بنیامین 🖤</h4>
+                                <p>دیوونه‌ترین عاشقت</p>
+                                <span class="zoom-pill">🔍 لمس برای زوم</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide" onclick="openLightbox('images/hanna-outdoor.jpg', 'قشنگ‌ترین لبخند دنیا در هوای دلنشین پاییزی 🍂💖')">
+                        <div class="slide-card">
+                            <img src="images/hanna-outdoor.jpg" alt="حنا در طبیعت" class="slide-img">
+                            <div class="slide-overlay">
+                                <h4>هوای دلنشین پاییز 🍂</h4>
+                                <p>آرامش مطلق در کنار تو</p>
+                                <span class="zoom-pill">🔍 لمس برای زوم</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-nav-btn prev" onclick="moveCarousel(-1)" aria-label="عکس قبلی">❮</button>
+                <button class="carousel-nav-btn next" onclick="moveCarousel(1)" aria-label="عکس بعدی">❯</button>
+
+                <div class="carousel-dots" id="carouselDots">
+                    <span class="dot active" onclick="goToSlide(0)"></span>
+                    <span class="dot" onclick="goToSlide(1)"></span>
+                    <span class="dot" onclick="goToSlide(2)"></span>
+                    <span class="dot" onclick="goToSlide(3)"></span>
+                </div>
+            </div>
+
+            <!-- Polaroid Grid View -->
+            <div class="polaroid-grid">
+                <div class="polaroid-card rotate-left" onclick="openLightbox('images/hanna-avatar.jpg', 'دختر پاییزی من با گل موهای نازش 🌺')">
+                    <div class="polaroid-pin">📌</div>
+                    <div class="polaroid-img-frame">
+                        <img src="images/hanna-avatar.jpg" alt="فری با گل مو" class="polaroid-real-img">
+                    </div>
+                    <p class="polaroid-caption">دختر پاییزی من با گل موهای نازش 🌺</p>
+                </div>
+
+                <div class="polaroid-card rotate-right" onclick="openLightbox('images/hanna-funny.jpg', 'فری قاچو کش وقتی شیطنتش گل می‌کنه! 😜🍉')">
+                    <div class="polaroid-pin">📌</div>
+                    <div class="polaroid-img-frame">
+                        <img src="images/hanna-funny.jpg" alt="فری شیطون" class="polaroid-real-img">
+                    </div>
+                    <p class="polaroid-caption">فری قاچو کش وقتی شیطنتش گل می‌کنه! 😜🍉</p>
+                </div>
+
+                <div class="polaroid-card rotate-straight" onclick="openLightbox('images/benyamin.jpg', 'دیوونه‌ترین عاشقت با همون تیپ مشکی دلخواهت 🖤')">
+                    <div class="polaroid-pin">📌</div>
+                    <div class="polaroid-img-frame">
+                        <img src="images/benyamin.jpg" alt="بنیامین تیپ مشکی" class="polaroid-real-img">
+                    </div>
+                    <p class="polaroid-caption">دیوونه‌ترین عاشقت با تیپ مشکی دلخواهت 🖤</p>
+                </div>
+
+                <div class="polaroid-card rotate-left" onclick="openLightbox('images/hanna-outdoor.jpg', 'قشنگ‌ترین لبخند دنیا در هوای دلنشین پاییزی 🍂💖')">
+                    <div class="polaroid-pin">📌</div>
+                    <div class="polaroid-img-frame">
+                        <img src="images/hanna-outdoor.jpg" alt="حنا در طبیعت" class="polaroid-real-img">
+                    </div>
+                    <p class="polaroid-caption">قشنگ‌ترین لبخند دنیا در پاییز 🍂💖</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FULLSCREEN ROMANTIC LIGHTBOX MODAL -->
+        <div id="photoLightbox" class="lightbox-modal hidden" onclick="closeLightbox(event)">
+            <div class="lightbox-content" onclick="event.stopPropagation()">
+                <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+                <div class="lightbox-img-wrap">
+                    <img id="lightboxImg" src="" alt="عکس فول‌اسکرین">
+                </div>
+                <div class="lightbox-caption-box">
+                    <p id="lightboxCaption">توضیحات عکس</p>
+                    <button class="heart-react-btn" onclick="reactHeart(this)">
+                        <span class="react-icon">❤️</span>
+                        <span class="react-counter" id="reactCounter">۱۵۴۸</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOVE LETTER (INTERACTIVE ENVELOPE) -->
+        <section class="letter-section">
+            <div class="section-tag">💌 پیام اختصاصی از قلبم</div>
+            <h2 class="section-title">نامه‌ای از اعماق دل بنیامین برای فِری</h2>
+            <p class="section-subtitle">روی مهر موم قلبی بزن تا پاکت باز بشه...</p>
+
+            <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
+                <div class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-pocket"></div>
+                    <div class="wax-seal">
+                        <span>❤️</span>
+                    </div>
+                    <div class="letter" id="letterContent">
+                        <div class="letter-inner">
+                            <span class="letter-date">۱۳۸۹/۰۸/۰۸ ✨</span>
+                            <h3 class="letter-to">حنای من، فریِ فرفری و قاچو کش من،</h3>
+                            <p>
+                                شاید خودت ندونی، اما هر بار که نگات می‌کنم، یا وقتی با اون خنده‌های خاصت دلبری می‌کنی، به این فکر می‌کنم که چقدر خوش‌شانس‌ترین آدم دنیام که تو رو توی زندگیم دارم.
+                            </p>
+                            <p>
+                                از همون ۳ خرداد ۱۴۰۵ که زندگیمون به هم گره خورد، لحظه‌لحظه‌اش برام شد قشنگ‌ترین خاطره. موهای فرفریت، مهربونی بی‌پایانت و حتی شیطنت‌هات برام مقدسه.
+                            </p>
+                            <p class="letter-quote">
+                                «بزرگ‌ترین و قشنگ‌ترین آرزوی امسال و همیشه من فقط یک چیزه: دوست دارم همیشه کنارم باشی...»
+                            </p>
+                            <div class="letter-signature">
+                                <span>عاشق همیشگیت، بنیامین 💕</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE QUIZ SECTION (بازی دونفره با جایزه) -->
+        <section class="quiz-section glass-panel">
+            <div class="quiz-badge">🎮 چالش مخصوص فری</div>
+            <h2 class="section-title">کوییز ۳ سوالی: چقدر منو می‌شناسی؟ 🧐</h2>
+            <p class="section-subtitle">به ۳ تا سوال زیر جواب بده تا کارت جایزه و کوپن طلایی برات باز بشه!</p>
+
+            <div class="quiz-container" id="quizContainer">
+                
+                <!-- Question 1 -->
+                <div class="quiz-card" id="qCard1">
+                    <span class="q-number">سوال اول 🌸</span>
+                    <h3 class="q-title">اولین بار که دیدمت، کدوم ویژگی فری بیشتر از همه دلمو برد؟</h3>
+                    <div class="q-options">
+                        <button class="option-btn" onclick="answerQuestion(1, false, this)">پیچ‌و‌تاب موهای فرفری نازت 🎀</button>
+                        <button class="option-btn" onclick="answerQuestion(1, false, this)">برق چشمات وقتی با خجالت می‌خندیدی ✨</button>
+                        <button class="option-btn" onclick="answerQuestion(1, true, this)">همه‌ی موارد! از همون ثانیه اول تمام دلم رفت 💖</button>
+                    </div>
+                    <div class="q-feedback" id="feedback1"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="quiz-card hidden" id="qCard2">
+                    <span class="q-number">سوال دوم 🖤</span>
+                    <h3 class="q-title">توی اون عکس با تیپ مشکی و کراوات، من برای کی انقدر خفن کرده بودم؟!</h3>
+                    <div class="q-options">
+                        <button class="option-btn" onclick="answerQuestion(2, false, this)">همینطوری عشقی زده بودم 😎</button>
+                        <button class="option-btn" onclick="answerQuestion(2, true, this)">فقط برای اینکه دلِ فری قاچو کش بلرزه و بگه چه پسری! 🔥</button>
+                        <button class="option-btn" onclick="answerQuestion(2, false, this)">عروسی دعوت بودم 🤷‍♂️</button>
+                    </div>
+                    <div class="q-feedback" id="feedback2"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="quiz-card hidden" id="qCard3">
+                    <span class="q-number">سوال سوم 🍉</span>
+                    <h3 class="q-title">شیرین‌ترین و اختصاصی‌ترین لقبی که فقط من صدات می‌کنم چیه؟</h3>
+                    <div class="q-options">
+                        <button class="option-btn" onclick="answerQuestion(3, false, this)">خانوم خوشگله</button>
+                        <button class="option-btn" onclick="answerQuestion(3, true, this)">فری قاچو کشِ خودمی! 🍉💖</button>
+                        <button class="option-btn" onclick="answerQuestion(3, false, this)">عزیز دل</button>
+                    </div>
+                    <div class="q-feedback" id="feedback3"></div>
+                </div>
+
+                <!-- Reward Voucher (Appears on Quiz Completion) -->
+                <div class="reward-box glass-panel hidden" id="quizRewardBox">
+                    <div class="reward-sparkle">🏆 🎁 💖</div>
+                    <h3 class="reward-title">تبریک میگم فری جانم! تو برنده شدی!</h3>
+                    <p class="reward-desc">به پاس شناخت ۱۰۰ درصدی، این کارت طلایی تا ابد متعلق به توئه:</p>
+                    
+                    <div class="golden-voucher">
+                        <div class="voucher-stamp">VIP LOVER</div>
+                        <h4>🎫 کوپن طلایی همیشگی بنیامین برای حنا</h4>
+                        <ul>
+                            <li>✨ حق همیشه با فری قاچو کش است (حتی وقتی قهر می‌کنه!).</li>
+                            <li>🍬 هر زمان اراده کنی، پاستیل و لواشک و خوراکی‌های دلخواهت به راهه.</li>
+                            <li>🤗 یک آغوش گرم و همیشگی در هر شرایطی بدون قید و شرط.</li>
+                            <li>💖 تضمین عشق بی‌پایان و ماندن در کنارت تا ابد.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- REASONS WHY I LOVE YOU (INTERACTIVE FLIP CARDS) -->
+        <section class="reasons-section">
+            <div class="section-tag">✨ دلایل عاشقی</div>
+            <h2 class="section-title">چرا انقدر عاشقِ «فری»ام؟ 🌸</h2>
+            <p class="section-subtitle">روی هر کارت بزن تا راز پشتش باز بشه!</p>
+
+            <div class="cards-grid">
+                <div class="flip-card" onclick="flipCard(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-panel">
+                            <span class="card-icon">🌀</span>
+                            <h3>پیچ‌و‌تاب موهای فرفریت</h3>
+                            <span class="click-hint">لمس کن 👈</span>
+                        </div>
+                        <div class="flip-card-back glass-panel">
+                            <p>هر تار از اون موهای فرفری قشنگت، مثل یه موج دریاست که دل منو با خودش غرق آرامش می‌کنه.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="flipCard(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-panel">
+                            <span class="card-icon">🍉</span>
+                            <h3>شیطنت‌های فری قاچو کش</h3>
+                            <span class="click-hint">لمس کن 👈</span>
+                        </div>
+                        <div class="flip-card-back glass-panel">
+                            <p>وقتی زبون‌درازی می‌کنی و می‌خندی، خستگی کل دنیام درمیره! هیشکی اندازه تو نمیتونه منو بخندونه.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="flipCard(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-panel">
+                            <span class="card-icon">💖</span>
+                            <h3>قلب مهربون و معصومت</h3>
+                            <span class="click-hint">لمس کن 👈</span>
+                        </div>
+                        <div class="flip-card-back glass-panel">
+                            <p>پاکی و صداقتی که توی دل توئه، توی هیچ نقطه‌ای از این جهان پیدا نمیشه فری جانم.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="flipCard(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-panel">
+                            <span class="card-icon">✨</span>
+                            <h3>همیشه کنارم بودنت</h3>
+                            <span class="click-hint">لمس کن 👈</span>
+                        </div>
+                        <div class="flip-card-back glass-panel">
+                            <p>بهترین حس دنیا همینه که دستاتو بگیرم و بدونم تو هر شرایطی تکیه‌گاه قلب همدیگه‌ایم.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SWEET SECRET MOOD BOOST GENERATOR (حرف‌های دلی یواشکی) -->
+        <section class="secret-mood-section glass-panel">
+            <div class="section-tag">🤍 هر وقت دلت گرفت بزن اینجا</div>
+            <h2 class="section-title">کپسول انرژی و عشق بنیامین 💌</h2>
+            <p class="section-subtitle">هر وقت دلت تنگ شد یا بی‌حوصله بودی، روی دکمه زیر بزن تا یه پیام دلنشین از من برات بیاد!</p>
+            
+            <div class="mood-box">
+                <div class="mood-message-display" id="moodMessageDisplay">
+                    «فری جانم، یادت نره تو قشنگ‌ترین اتفاق زندگی منی! لبخند بزن چون با خنده‌هات دنیام روشن میشه... 🌸»
+                </div>
+                <button class="mood-generate-btn" onclick="generateSweetMessage()">
+                    ✨ یه حرف قشنگِ دیگه برام بگو بنیامین!
+                </button>
+            </div>
+        </section>
+
+        <!-- FINAL BIRTHDAY MESSAGE & FOOTER -->
+        <footer class="site-footer glass-panel">
+            <div class="footer-heart">💖</div>
+            <h2>تولدت هزاران بار مبارک حنای من 🌸</h2>
+            <p>«دوست دارم همیشه کنارم باشی... بهترین دختر پاییز!»</p>
+            <div class="footer-bottom">
+                <span>ساخته شده با تمام عشق توسط بنیامین برای فری قاچو کش 🎀 | ۱۳۸۹/۰۸/۰۸</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- FLOATING INTERACTIVE KNIFE CHICK COMPANION (جوجه وکتور اختصاصی با چاقو، پاپیون صورتی و قاچ هندونه) -->
+    <div id="knifeChickMascot" class="knife-chick-companion" onclick="pokeChick()">
+        <!-- Speech Bubble -->
+        <div class="chick-speech-bubble" id="chickSpeech">
+            <span id="chickSpeechText">قاچ قاچ! فری قاچو کش وارد می‌شود! 🍉🔪</span>
+        </div>
+
+        <!-- The Animated Vector SVG Chick (100% شفاف، بدون باگ عکس، فوق‌العاده باکیفیت) -->
+        <div class="chick-svg-wrap">
+            <svg viewBox="0 0 160 180" class="chick-svg" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="chickBodyGrad" cx="45%" cy="40%" r="60%">
+                        <stop offset="0%" stop-color="#fff3b0" />
+                        <stop offset="70%" stop-color="#ffd166" />
+                        <stop offset="100%" stop-color="#f4a261" />
+                    </radialGradient>
+                    <linearGradient id="knifeBladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="40%" stop-color="#f8f9fa" />
+                        <stop offset="70%" stop-color="#dee2e6" />
+                        <stop offset="100%" stop-color="#adb5bd" />
+                    </linearGradient>
+                    <linearGradient id="knifeHandleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ff758f" />
+                        <stop offset="100%" stop-color="#c9184a" />
+                    </linearGradient>
+                    <filter id="chickGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#ff758f" flood-opacity="0.3"/>
+                    </filter>
+                </defs>
+
+                <!-- Ground Shadow -->
+                <ellipse cx="80" cy="168" rx="38" ry="8" fill="rgba(0,0,0,0.18)" class="ground-shadow" />
+
+                <!-- Feet -->
+                <ellipse cx="62" cy="162" rx="10" ry="5" fill="#f77f00" />
+                <ellipse cx="98" cy="162" rx="10" ry="5" fill="#f77f00" />
+
+                <!-- Main Chubby Body -->
+                <g class="chick-body-group" filter="url(#chickGlow)">
+                    <ellipse cx="80" cy="104" rx="50" ry="56" fill="url(#chickBodyGrad)" />
+                    <!-- Belly highlight -->
+                    <ellipse cx="80" cy="118" rx="33" ry="34" fill="#fff9db" opacity="0.88" />
+
+                    <!-- Cute hair tufts on head -->
+                    <path d="M 76 46 Q 80 26 88 34 Q 82 42 80 46" fill="#ffd166" />
+                    <path d="M 72 48 Q 65 32 75 38" fill="#f4a261" />
+
+                    <!-- Blushing Cheeks -->
+                    <ellipse cx="48" cy="106" rx="9" ry="6" fill="#ff758f" opacity="0.75" />
+                    <ellipse cx="112" cy="106" rx="9" ry="6" fill="#ff758f" opacity="0.75" />
+
+                    <!-- Kawaii Sparkle Eyes -->
+                    <g class="chick-eyes">
+                        <!-- Left Eye -->
+                        <circle cx="58" cy="92" r="7.5" fill="#2b2d42" />
+                        <circle cx="56" cy="89" r="2.8" fill="#ffffff" />
+                        <circle cx="60" cy="94" r="1.3" fill="#ffffff" />
+                        <!-- Right Eye -->
+                        <circle cx="102" cy="92" r="7.5" fill="#2b2d42" />
+                        <circle cx="100" cy="89" r="2.8" fill="#ffffff" />
+                        <circle cx="104" cy="94" r="1.3" fill="#ffffff" />
+                    </g>
+
+                    <!-- Tiny Orange Beak -->
+                    <path d="M 73 97 Q 80 94 87 97 Q 80 109 73 97 Z" fill="#e85d04" />
+                    <path d="M 75 98 Q 80 101 85 98" stroke="#d00000" stroke-width="1.2" fill="none" />
+
+                    <!-- Left Wing holding Watermelon Slice -->
+                    <g class="left-wing-group">
+                        <ellipse cx="34" cy="114" rx="13" ry="18" transform="rotate(18 34 114)" fill="#ffd166" />
+                        <!-- Mini Watermelon -->
+                        <g transform="translate(14, 110) scale(0.65) rotate(-15)">
+                            <path d="M 0 0 A 24 24 0 0 0 48 0 Z" fill="#2b9348" />
+                            <path d="M 4 0 A 20 20 0 0 0 44 0 Z" fill="#ff4d6d" />
+                            <circle cx="18" cy="8" r="1.5" fill="#000" />
+                            <circle cx="25" cy="12" r="1.5" fill="#000" />
+                            <circle cx="32" cy="8" r="1.5" fill="#000" />
+                        </g>
+                    </g>
+
+                    <!-- Pink Satin Bow Tie on Head -->
+                    <g class="pink-bow" transform="translate(80, 56) scale(0.95)">
+                        <!-- Left Ribbon Loop -->
+                        <path d="M 0 0 C -20 -16, -26 16, 0 6 Z" fill="#ff4d6d" stroke="#c9184a" stroke-width="1" />
+                        <path d="M -2 -1 C -14 -9, -18 9, -2 4 Z" fill="#ff758f" />
+                        <!-- Right Ribbon Loop -->
+                        <path d="M 0 0 C 20 -16, 26 16, 0 6 Z" fill="#ff4d6d" stroke="#c9184a" stroke-width="1" />
+                        <path d="M 2 -1 C 14 -9, 18 9, 2 4 Z" fill="#ff758f" />
+                        <!-- Bow Center Knot -->
+                        <circle cx="0" cy="2" r="5.5" fill="#ff758f" stroke="#c9184a" stroke-width="1" />
+                        <!-- Ribbon Tails -->
+                        <path d="M -4 7 L -11 20 L -3 17 Z" fill="#ff4d6d" />
+                        <path d="M 4 7 L 11 20 L 3 17 Z" fill="#ff4d6d" />
+                    </g>
+
+                    <!-- Right Wing Holding Shiny Kitchen Knife (چاقوی تیز و براق) -->
+                    <g class="right-wing-knife-group" id="knifeArmGroup">
+                        <!-- Wing -->
+                        <ellipse cx="126" cy="114" rx="13" ry="18" transform="rotate(-22 126 114)" fill="#ffd166" />
+
+                        <!-- The Knife Graphic -->
+                        <g class="knife-graphic" transform="translate(130, 94) rotate(-35)">
+                            <!-- Pink Handle -->
+                            <rect x="0" y="26" width="10" height="24" rx="4" fill="url(#knifeHandleGrad)" stroke="#800f2f" stroke-width="1" />
+                            <circle cx="5" cy="33" r="1.3" fill="#ffd166" />
+                            <circle cx="5" cy="42" r="1.3" fill="#ffd166" />
+                            <!-- Knife Bolster -->
+                            <rect x="-1" y="24" width="12" height="3" rx="1" fill="#495057" />
+                            <!-- Shiny Sharp Blade -->
+                            <path d="M 0 24 L 0 0 C 4 1, 14 6, 16 24 Z" fill="url(#knifeBladeGrad)" stroke="#6c757d" stroke-width="0.8" />
+                            <!-- Blade Reflection Glint -->
+                            <path d="M 3 22 L 3 4 C 6 7, 10 13, 11 22 Z" fill="#ffffff" opacity="0.65" class="knife-glint" />
+                            <!-- Sparkle Star on Blade Tip -->
+                            <text x="8" y="-1" font-size="14" fill="#ffd166" class="blade-sparkle">✨</text>
+                        </g>
+                    </g>
+
+                </g>
+            </svg>
+        </div>
+        
+        <div class="chick-pill-tag">
+            <span>فری قاچو کش 🐥🔪 (لمس کن)</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
